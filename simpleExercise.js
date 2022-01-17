@@ -590,3 +590,5 @@ isPrime(1); // returns false
 isPrime(5); // returns true
 isPrime(91); // returns false
 isPrime(1000000); // returns false
+
+// 3.Write a function called "confirmEnding" that takes 2 strings as input, and returns a boolean value that indicates if the first input ends with the second input.
