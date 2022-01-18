@@ -567,7 +567,7 @@ function mySort(arr) {
   return result;
 }
 
-mySort([17, 0, -3, 2, 1, 0.5]); // returns [-3, 0, 0.5, 1, 2, 17]
+// mySort([17, 0, -3, 2, 1, 0.5]); // returns [-3, 0, 0.5, 1, 2, 17]
 
 // 2.Write a function called "isPrime" that takes an integer as input, and returns a boolean value that indicates if the input number is prime.
 // 質數 (Prime) 定義 只有一和本身可以整除 ex.2, 3, 5, 7.
@@ -586,9 +586,27 @@ function isPrime(n) {
   return true;
 }
 
-isPrime(1); // returns false
-isPrime(5); // returns true
-isPrime(91); // returns false
-isPrime(1000000); // returns false
+// isPrime(1); // returns false
+// isPrime(5); // returns true
+// isPrime(91); // returns false
+// isPrime(1000000); // returns false
 
 // 3.Write a function called "confirmEnding" that takes 2 strings as input, and returns a boolean value that indicates if the first input ends with the second input.
+
+function confirmEnding(str1, str2) {
+  let k = str1.length - 1;
+  for (let i = str2.length - 1; i >= 0; i--) {
+    if (str2[i] != str1[k]) {
+      console.log(false);
+      return false;
+    } else {
+      k--;
+    }
+  }
+  console.log(true);
+  return true;
+}
+// 利用第二個參數的總數當作循環比對的次數, 就可以給出正確的判斷.
+// confirmEnding("Bastian", "n"); // true
+// confirmEnding("Connor", "n"); // false
+// confirmEnding("Open sesame", "same"); // true
