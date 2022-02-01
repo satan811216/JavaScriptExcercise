@@ -610,3 +610,218 @@ function confirmEnding(str1, str2) {
 // confirmEnding("Bastian", "n"); // true
 // confirmEnding("Connor", "n"); // false
 // confirmEnding("Open sesame", "same"); // true
+
+// 4.Write a function called "findDuplicate" that an array of integers as inputs, and check if there's any duplicate values in the array.
+function findDuplicate(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      if (arr[i] == arr[j] && i != j) {
+        console.log(true);
+        return true;
+      }
+    }
+  }
+  console.log(false);
+  return false;
+}
+
+// findDuplicate([1, 3, 5, 7, 9, 3]); // returns true
+// findDuplicate([]); // returns false
+// findDuplicate([3, 4, 5, 6, 7, 10000, 0]); // returns false
+
+// 5. Write a function called "palindrome" that checks if the input string is a palindrome. (Search on google if you don't know what a palindrome is.)
+function palindrome(str) {
+  let i = 0;
+  let j = str.length - 1;
+  while (i < j) {
+    if (str[i] != str[j]) {
+      console.log(false);
+      return false;
+    }
+    i++;
+    j--;
+  }
+  console.log(true);
+  return true;
+}
+// palindrome("bearaeb"); // true
+// palindrome("Whatever revetahw"); // true
+// palindrome("Aloha, how are you today?"); // false
+
+// 6. Write a function called "pyramid" that takes an integer as input, and prints a pyramid in the following pattern:
+
+// 解說:
+// pyramid(4);
+// row1   *   3格空白 1顆星
+// row2  ***  2格空白 3顆星
+// row3 ***** 1格空白 5顆星
+// row4*******0格空白 7顆星
+// 根據上面可以簡單推論下面兩行的特性
+// let j=1, let i=n-1
+// for : draw stars based on j, j+2
+
+// 拆解成 drawRow(space, star) 可以根據參數 就可以畫出 幾格空白和幾格星星.
+// pyramid(n) 控制要畫幾次, 每次的參數應該要什麼樣的邏輯 再重新帶入.
+// raw1~4 = k
+
+function drawRow(space, star) {
+  let result = "";
+  for (let i = 0; i < space; i++) {
+    result += " ";
+  }
+  for (let i = 0; i < star; i++) {
+    result += "*";
+  }
+  console.log(result);
+}
+
+function pyramid(n) {
+  let i = n - 1;
+  let j = 1;
+  for (let k = 1; k <= n; k++) {
+    drawRow(i, j);
+    i--;
+    j += 2;
+  }
+}
+
+// pyramid(1);
+//*
+// pyramid(2);
+//  *
+// ***
+// pyramid(4);
+//    *
+//   ***
+//  *****
+// *******
+
+// 7. Write a function called "inversePyramid" that draws pyramid upside down.
+
+function inversePyramid(n) {
+  let i = 0;
+  let j = 1;
+  for (let t = 2; t <= n; t++) {
+    j += 2;
+  }
+  for (let k = 1; k <= n; k++) {
+    drawRow(i, j);
+    i++;
+    j -= 2;
+  }
+}
+// inversePyramid(4);
+// *******
+//  *****
+//   ***
+//    *
+function inversePyramid(n) {
+  let i = 0;
+  let j = 2 * n - 1;
+  for (let k = 1; k <= n; k++) {
+    drawRow(i, j);
+    i++;
+    j -= 2;
+  }
+}
+
+// # Intermediate Exercises II
+// There are 3 questions in this section. All 3 of them require some programming skill. In fact, if you never learn algorithm and data structure, then these questions might seem hard for you. Try your best. If you can do it, that means you are really talented in programming. Good luck!!
+
+// 1. Write a function called "factorPrime" that takes an integer as input, and returns the prime factorization of the input.
+
+function factorPrime(n) {
+  let starter = 2,
+    arr = [],
+    result;
+  while (starter < n) {
+    if (n % starter == 0) {
+      n = n / starter;
+      arr.push(starter);
+    } else {
+      starter++;
+    }
+  }
+  arr.push(n);
+  result = arr.join(" x ");
+  console.log(result);
+  return result;
+}
+
+// factorPrime(120);  // returns "2 x 2 x 2 x 3 x 5"
+
+function factorPrime(n) {
+  let answer = n + " = ";
+  let p = 2;
+  while (p <= n) {
+    if (n % p == 0) {
+      answer += p + " x ";
+      n /= p;
+    } else {
+      p++;
+    }
+  }
+  answer = answer.substring(0, answer.length - 3);
+  console.log(answer);
+}
+
+function factorPrime(n) {
+  let result = "",
+    starter = 2;
+  while (starter < n) {
+    if (n % starter == 0) {
+      n /= starter;
+      result += starter + " x ";
+    } else {
+      starter++;
+    }
+  }
+  result += n;
+  console.log(result);
+}
+
+// 2. Write a function called "intersection" that takes 2 arrays, and returns an array of elements that are in the intersection of 2 arrays.
+
+function intersection(arr1, arr2) {
+  let result = [];
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] == arr2[j]) {
+        // check if result array already has arr1[i] or arr2[j]
+        let okay = true;
+        for (let k = 0; k < result.length; k++) {
+          if (arr1[i] == result[k]) {
+            okay = false;
+          }
+        }
+        if (okay) {
+          result.push(arr1[i]);
+        }
+      }
+    }
+  }
+  console.log(result);
+}
+
+intersection([1, 3, 4, 6, 10], [5, 11, 4, 3, 3, 100, 144, 0]); // returns [3, 4]
+
+// 3. Write a function called "flatten" that flattens an array.
+function flatten(arr) {
+  let result = [];
+  helper(arr);
+  console.log(result);
+  return result;
+
+  function helper(arr1) {
+    for (let i = 0; i < arr1.length; i++) {
+      if (Array.isArray(arr1[i])) {
+        helper(arr1[i]);
+      } else {
+        result.push(arr1[i]);
+      }
+    }
+  }
+}
+
+flatten([1, [[], 2, [0, [1]], [3]], [1, 3, [3], [4, [1]], [2]]]);
+// returns [1, 2, 0, 1, 3, 1, 3, 3, 4, 1, 2]
